@@ -13,12 +13,12 @@ module systemickernel_i_alu (
             8'b00000111: r = a & b;
             8'b00001111: r = a | b;
             8'b00011111: r = a ^ b;
-            8'b00111111: r = ~(a | b); // Örnek mantıksal işlem
+            8'b00111111: r = ~(a | b);
             8'b01111111: r = a << b[4:0];
-            8'b00000101: r = a >> b[4:0];                  // SRL için net opcode
-            8'b01111111: r = $signed(a) >>> b[4:0];       // SRA
-            8'b00111111: r = {31'b0, ($signed(a) < $signed(b))}; // 1 biti 32 bite genişlettik (SLT)
-            8'b00011111: r = {31'b0, (a < b);}            // 1 biti 32 bite genişlettik (SLTU)
+            8'b00000101: r = a >> b[4:0];                  // SRL
+            8'b10000000: r = $signed(a) >>> b[4:0];       // SRA (Benzersiz opcode)
+            8'b10000001: r = {31'b0, ($signed(a) < $signed(b))}; // SLT (Benzersiz opcode)
+            8'b10000010: r = {31'b0, (a < b)};            // SLTU (Parantez ve yazım hatası düzeltildi)
             default:     r = 32'b0;
         endcase
     end
