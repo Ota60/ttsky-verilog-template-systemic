@@ -16,9 +16,9 @@ module systemickernel_i_alu (
             8'b00111111: r = ~(a | b); // Örnek mantıksal işlem
             8'b01111111: r = a << b[4:0];
             8'b00000101: r = a >> b[4:0];                  // SRL için net opcode
-            8'b011111111: r = $signed(a) >>> b[4:0];       // SRA
-            8'b001111111: r = {31'b0, ($signed(a) < $signed(b))}; // 1 biti 32 bite genişlettik (SLT)
-            8'b000111111: r = {31'b0, (a < b);            // 1 biti 32 bite genişlettik (SLTU)
+            8'b01111111: r = $signed(a) >>> b[4:0];       // SRA
+            8'b00111111: r = {31'b0, ($signed(a) < $signed(b))}; // 1 biti 32 bite genişlettik (SLT)
+            8'b00011111: r = {31'b0, (a < b);}            // 1 biti 32 bite genişlettik (SLTU)
             default:     r = 32'b0;
         endcase
     end
